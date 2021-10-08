@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PBJar CTF</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="../assets/img/favicon.ico" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+
+
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="../index2.html">PBjar CTF<span>.</span></a></h1>
+
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <a href="https://discord.gg/HcS4efUSyJ"><img src="../assets/img/discord.png" style="width:50px; padding-right:25%"></a>
+          <li><a class="nav-link scrollto " href="../index2.html">Home</a></li>
+          <li><a class="nav-link scrollto " href="/leaderboard">Leaderboard</a></li>
+          <li><a class="nav-link scrollto" href="/challenges">Challenges</a></li>
+          <li><a class="nav-link scrollto active" href="/team">Team</a></li>
+          <li><a class="nav-link scrollto " href="/logout">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+
+
+  <main id="main">
+     <div class="section-title">
+        <h2>Team Information: </h2>
+        <h3>Team:  <%= name %> </h3>
+
+        <h5>Referrals: <%= refers %></h5>
+    </div>
+  <section class="about section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="col-lg-15 pt-4 pt-lg-2 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+          <h5> Referral Token: </h5> <h4><span> <%= token %> </span></h4> <h6>(share this to others while signing up to get points)</h6>
+
+          
+        </div>
+
+
+      </div>
+    </section>
+  <div class="col-6 center" style="min-height: 230px;">
+      <table class="table scoreboard" style="border: none;">
+        <thead style="text-align: center;">
+          <tr>
+            <th style="width: 4em;border-top: none;">#</th>
+            <th style="border-top: none;">Solved</th>
+            <th style="width: 5em;border-top: none">Time</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center;" id="sc-teams">
+          
+          <%for (var result in res){%>
+            <tr>
+            <th style="font-weight:normal;"><%=Number(result)+1%></th>
+            <th style="font-weight:normal;"><%=res[result].name%></th>
+            <th style="font-weight:normal;"><%=res[result].points%></th>
+            </tr>
+          <%}%>
+        </tbody>
+      </table>
+    </div>
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/purecounter/purecounter.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

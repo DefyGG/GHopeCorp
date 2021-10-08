@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PBJar CTF</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link href="../assets/img/favicon.ico" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="../index2.html">PBjar CTF<span>.</span></a></h1>
+
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <a href="https://discord.gg/HcS4efUSyJ"><img src="../assets/img/discord.png" style="width:50px; padding-right:25%"></a>
+          <li><a class="nav-link scrollto " href="../index2.html">Home</a></li>
+          <li><a class="nav-link scrollto active" href="/leaderboard">Leaderboard</a></li>
+          <li><a class="nav-link scrollto" href="/challenges">Challenges</a></li>
+          <li><a class="nav-link scrollto " href="/team">Team</a></li>
+          <li><a class="nav-link scrollto " href="/logout">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+
+
+  <main id="main">
+  <div class="row" style="justify-content: center;margin: 0;margin-bottom: 50px;display: flex;">
+  <br>
+     <div class="section-title">
+
+      <h3><%= type %> Leaderboard: </h3>
+  </div>
+  <div class="row" style="justify-content: center;margin: 0;margin-bottom: 50px;display: flex;">
+    <div class="col-3">
+      <div class="challengeBox">
+        <div class="form-group">
+          <label for="filtereligibility">Division</label>
+          <select class="form-control" id="divv">
+            <option value="all">All</option>
+            <option value="hi">Highschool (6-12)</option>
+            <option value="op">Open/College</option>
+          </select>
+          <br>
+          <label for="filtercountry">Type of Leaderboard</label>
+
+          <form action="/leaderboard" method="post">
+            <br>
+              <button class="btn btn-primary" style="border-color: #890620; background-color: #890620" name="<%- type %>" value="upvote">Switch Leaderboard</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 " style="min-height: 230px;">
+      <table class="table scoreboard" style="border: none;">
+        <thead style="text-align: center;">
+          <tr>
+            <th style="width: 4em;border-top: none;">#</th>
+            <th style="border-top: none;">Team</th>
+            <th style="width: 5em;border-top: none">Points</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center;" id="sc-teams">
+          
+          <%for (var result in res){%>
+            <tr>
+            <th style="font-weight:normal;"><%=Number(result)+1%></th>
+            <th style="font-weight:normal;"><%=res[result].name%></th>
+            <th style="font-weight:normal;"><%=res[result].points%></th>
+            </tr>
+          <%}%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  
+  </div>
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script>
+    var high=<%- JSON.stringify(high) %>;
+    var len=<%- JSON.stringify(len) %>;
+    var rows = document.getElementsByTagName("table")[0].rows;
+    var arr=[]
+    for (var i=1;i<=len;i++){
+      arr.push([rows[i].cells[1].innerHTML,rows[i].cells[2].innerHTML]);
+
+    }
+ 
+    loadScoreBoard();
+    function loadScoreBoard() {
+
+      var a = document.getElementById("divv").value;
+
+      $("#sc-teams").empty();
+      var rank = 1;
+      for(var i = 0;i < len;++i) {
+        if (a=="hi" && high[i]==0) continue;
+        if (a=="op" && high[i]==1) continue;
+        $("#sc-teams").append(
+        '<tr class="">' + 
+          '<td>' + (rank++) + '</td>' + 
+            '<td><a href="javascript:viewProfile(' + "'" + arr[i][0] + "'" + ');" class="ctflink" id="teamname-' + i + '"></a></td>' +
+          '<td>' + arr[i][1] + '</td>' + 
+        '</tr>');
+        $("#teamname-" + i).text(arr[i][0]);
+      }
+    }
+    document.getElementById('divv').addEventListener('change', function() {
+      loadScoreBoard();
+    });
+
+
+    function viewProfile(num) {
+      var encodedData = window.btoa(num);
+      var url = '/' + 'team';
+      var form = $('<form action="' + url + '" method="post">' +
+        '<input type="text" name="teamn" value="' + encodedData + '" />' +
+        '</form>');
+      $('body').append(form);
+      form.submit();
+    }
+
+
+    
+    
+  </script>
+
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/purecounter/purecounter.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

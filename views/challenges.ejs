@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PBJar CTF</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="../assets/img/favicon.ico" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/ctf.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="../index2.html">PBjar CTF<span>.</span></a></h1>
+
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <a href="https://discord.gg/HcS4efUSyJ"><img src="../assets/img/discord.png" style="width:50px; padding-right:25%"></a>
+          <li><a class="nav-link scrollto " href="../index2.html">Home</a></li>
+          <li><a class="nav-link scrollto " href="/leaderboard">Leaderboard</a></li>
+          <li><a class="nav-link scrollto active" href="/challenges">Challenges</a></li>
+          <li><a class="nav-link scrollto " href="/team">Team</a></li>
+          <li><a class="nav-link scrollto " href="/logout">Logout</a></li>
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+
+
+  <main id="main">
+  <div class="section-title">
+          <h2>Challenges</h2>
+  </div>
+
+ <div class="row" style="justify-content: center;margin: 0;margin-bottom: 50px;display: flex;">
+    <div class="col-3">
+      <div class="challengeBox">
+        <b style="font-size: 18px;margin-bottom: 5px;">Filters</b>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-solved">
+          <label class="form-check-label" for="checkbox-solved" id="display-solvecount">
+            Show Solved (0/0 solved)
+          </label>
+        </div>
+      </div>
+      <div class="challengeBox">
+        <b style="font-size: 18px;margin-bottom: 5px;">Categories</b>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-crypto">
+          <label class="form-check-label" for="checkbox-crypto">
+            crypto (<a id="crypto-solve">0/0</a> solved)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-misc">
+          <label class="form-check-label" for="checkbox-misc">
+            misc (<a id="misc-solve">0/0</a> solved)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-pwn">
+          <label class="form-check-label" for="checkbox-pwn">
+            pwn (<a id="pwn-solve">0/0</a> solved)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-rev">
+          <label class="form-check-label" for="checkbox-rev">
+            rev (<a id="rev-solve">0/0</a> solved)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-web">
+          <label class="form-check-label" for="checkbox-web">
+            web (<a id="web-solve">0/0</a> solved)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-forens">
+          <label class="form-check-label" for="checkbox-forens">
+            forens (<a id="forens-solve">0/0</a> solved)
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-6" id="challengesDisplay">
+    </div>
+  </div>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/purecounter/purecounter.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+
+
+    var challs=<%- JSON.stringify(challs) %>;
+    var solved=new Set(<%- JSON.stringify(you) %>);
+    function loadChallenges() {
+      function CTFCCCFormula(pts,cnt) {
+        var base = pts * 0.2;
+        var res = base + ((pts - base) / Math.pow(1 + Math.max(0,cnt) / 100.92201,1.206069));
+        return Math.round(res);
+      }
+      var numSolved = 0;
+      var numSolvedforens = 0;var numforens = 0;
+      var numSolvedcrypto = 0;var numcrypto = 0;
+      var numSolvedmisc = 0;var nummisc = 0;
+      var numSolvedpwn = 0;var numpwn = 0;
+      var numSolvedrev = 0;var numrev = 0;
+      var numSolvedweb = 0;var numweb = 0;
+
+      for(var i = 0;i < challs.length;++i) {
+        numSolved += solved.has(challs[i]["name"]);
+        if(challs[i]["type"] == "forens") {
+          numforens++;numSolvedforens += solved.has(challs[i]["name"]);
+        }else if(challs[i]["type"] == "crypto") {
+          numcrypto++;numSolvedcrypto += solved.has(challs[i]["name"]);
+        }else if(challs[i]["type"] == "misc") {
+          nummisc++;numSolvedmisc += solved.has(challs[i]["name"]);
+        }else if(challs[i]["type"] == "pwn") {
+          numpwn++;numSolvedpwn += solved.has(challs[i]["name"]);
+        }else if(challs[i]["type"] == "rev") {
+          numrev++;numSolvedrev += solved.has(challs[i]["name"]);
+        }else if(challs[i]["type"] == "web") {
+          numweb++;numSolvedweb += solved.has(challs[i]["name"]);
+        }
+      }
+      document.getElementById("crypto-solve").innerHTML=numSolvedcrypto + "/" + numcrypto;
+      document.getElementById("misc-solve").innerHTML=numSolvedmisc + "/" + nummisc;
+      document.getElementById("pwn-solve").innerHTML=numSolvedpwn + "/" + numpwn;
+      document.getElementById("rev-solve").innerHTML=numSolvedrev + "/" + numrev;
+      document.getElementById("web-solve").innerHTML=numSolvedweb + "/" + numweb;
+      document.getElementById("forens-solve").innerHTML=numSolvedforens + "/" + numforens;
+      document.getElementById("display-solvecount").innerHTML="Show Solved (" + numSolved + "/" + challs.length + " solved)";
+      $("#challengesDisplay").empty();
+
+
+      var cbsolved = document.getElementById("checkbox-solved").checked;
+      var cbcrypto = document.getElementById("checkbox-crypto").checked;
+      var cbmisc = document.getElementById("checkbox-misc").checked;
+      var cbpwn = document.getElementById("checkbox-pwn").checked;
+      var cbrev = document.getElementById("checkbox-rev").checked;
+      var cbweb = document.getElementById("checkbox-web").checked;
+      var cbforens = document.getElementById("checkbox-forens").checked;
+      var cball = !cbcrypto && !cbmisc && !cbpwn && !cbrev && !cbweb && !cbforens;
+
+      for(var i = 0;i < challs.length;++i) {
+
+          if(!cbsolved && solved.has(challs[i]["name"])) continue;
+          var type = challs[i]["type"];
+          if(!cball && ((type == "forens" && !cbforens) || (type == "crypto" && !cbcrypto) || (type == "misc" && !cbmisc) || (type == "pwn" && !cbpwn) || (type == "rev" && !cbrev) || (type == "web" && !cbweb))) continue;
+          var downloads = "";
+          if(challs[i]["downloads"].length > 0) {
+            downloads += '<div class="chal-downloads"><p style="margin-bottom: 3px;">Downloads</p>';
+          
+            downloads += '<div class="tag-container"><a href="' + challs[i]["downloads"] + '" class="ctflink" download>' + challs[i]["downloads"] + '</a></div>'
+     
+            downloads += '</div>';
+
+          }
+          var solvecnt = challs[i]["solves"];
+          var points = CTFCCCFormula(challs[i]["base"],solvecnt);
+          var points = Math.max(points,1);
+          $("#challengesDisplay").append(
+          '<div class="challengeBox" id="chal-' + challs[i]["name"] + '">' +
+            '<div class="row">' +
+              '<div class="col-6">' +
+                '<div class="chal-title">' + challs[i]["name"] + '<br></div>' +
+                  '<div class="chal-author">' + challs[i]["author"] + '</div>' + 
+                '</div>' +
+                '<div class="col-6 chal-leftcard">' + 
+                  '<p target="_blank" class="chal-solves">' + solvecnt + ' solves / ' + points + ' points</p>' +
+                '</div>' + 
+              '</div>' + 
+              '<div class="chal-divider"></div>' +
+              '<div class="chal-des">' + 
+                challs[i]["description"] + 
+                ' <form action="/challenges" method="post"> <div class="input-group mb-3 chal-submit"> ' + 
+                  '<input autocomplete="off" autocorrect="off" type="text" class="form-control ' + (solved.has(challs[i]["name"]) ? "input-success" : "") + '" placeholder="Flag' + (solved.has(challs[i]["name"]) ? " (solved)" : "") + '" aria-label="Flag" name="'+challs[i]["name"]+'" aria-describedby="flag-btn-"' + challs[i]["name"] + ' style="background: #FAFAFA" id="inp-' + challs[i]["name"] + '">' + 
+                  '<div class="input-group-append">' + 
+                    '<button class="btn btn-outline-secondary" type="submit" id="flag-btn-' + challs[i]["name"] + '">Submit</button>'  + 
+                  ' </div> </form>'  + 
+                '</div>' + 
+              '</div>' +
+              downloads + 
+            '</div>' +
+          '</div>');
+      } 
+    }
+    loadChallenges();
+    $(function() {$(":checkbox").change(() => {loadChallenges();})});
+    var status=<%- re%>;
+    if(status == 1) {
+        // Success
+        $("body").append('<div class="toast ctf-toast" id="flag-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000"><span class="toast-message">Flag Submitted Successfully!</span></div>');
+        $("#flag-success").toast('show');
+        socket.emit("getCTFChallenges",id);
+    }else if(status == 0) {
+      // Wrong flag
+      console.log("a");
+      $("body").append('<div class="toast ctf-toast" id="flag-wrong" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000"><span class="toast-message">Your Flag is Incorrect.</span></div>');
+      $("#flag-wrong").toast('show');
+    }else if(status == 2) {
+      // Already submitted
+      $("body").append('<div class="toast ctf-toast" id="flag-resub" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000"><span class="toast-message">You Already Have This Flag!</span></div>');
+      $("#flag-resub").toast('show');
+    }
+  </script>
+
+</body>
+
+</html>

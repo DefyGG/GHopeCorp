@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PBJar CTF</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link href="../assets/img/favicon.ico" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+
+
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="../index2.html">PBjar CTF<span>.</span></a></h1>
+
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <a href="https://discord.gg/HcS4efUSyJ"><img src="../assets/img/discord.png" style="width:50px; padding-right:25%"></a>
+          <li><a class="nav-link scrollto " href="../index2.html">Home</a></li>
+          <li><a class="nav-link scrollto active" href="/leaderboard">Leaderboard</a></li>
+          <li><a class="nav-link scrollto" href="/challenges">Challenges</a></li>
+          <li><a class="nav-link scrollto " href="/team">Team</a></li>
+          <li><a class="nav-link scrollto " href="/logout">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+
+
+  <main id="main">
+ 
+     
+
+  <div class="row" data-aos="fade-up" data-aos-delay="100" >
+    <h3><span>Add a challenge to queue:</span></h3>
+    <div class="col-lg-6; float:left" >
+      <form class="input-forms" action="/adminpanel" method="post">
+        <div class="row">
+          <div class="col form-group">
+            <input type="text" class="form-control" id="cname" placeholder="Chall Name" name="cname" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="cdesc" placeholder="Chall Description" name="cdesc" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="author" placeholder="Chall Author" name="author" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="zip" placeholder="Name of Zip (ex: walkthrough.zip)" name="zip">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="flag" placeholder="Solution Flag" name="flag" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="cat" placeholder="Category (pwn, forens, crypto, misc, rev, web)" name="cat" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" id="base" placeholder="Base Score (anything but Sanity and Discord enter 500)" name="base" required>
+        </div>
+        <div class="text-center"><button type="submit" class="btn btn-primary">Add</button></div>
+      </form>
+
+    </div>
+
+  </div>
+  <div class="row" data-aos="fade-up" data-aos-delay="100" >
+    <h3><span>Update Challenge: </span></h3>
+    <div class="col-lg-6; float:left" >
+      <form class="input-forms" action="/adminpanel" method="post">
+        <div class="row">
+          <div class="col form-group">
+            <input type="text" class="form-control" id="cnameu" placeholder="Chall Name" name="cnameu" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="cnameuu" placeholder="New Chall Name" name="cnameuu" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="cdesc" placeholder="Chall Description" name="cdesc" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="author" placeholder="Chall Author" name="author" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="zip" placeholder="Name of Zip (ex: walkthrough.zip)" name="zip">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="flag" placeholder="Solution Flag" name="flag" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="cat" placeholder="Category (pwn, forens, crypto, misc, rev, web)" name="cat" required>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" id="base" placeholder="Base Score (anything but Sanity and Discord enter 500)" name="base" required>
+        </div>
+        <div class="text-center"><button type="submit" class="btn btn-primary">Add</button></div>
+      </form>
+
+    </div>
+
+  </div>
+
+  <div class="row" data-aos="fade-up" data-aos-delay="100" >
+    <h3><span>Fix Team:</span></h3>
+    <div class="col-lg-6; float:left" >
+      <form class="input-forms" action="/adminpanel" method="post">
+        <div class="row">
+          <div class="col form-group">
+            <input type="text" class="form-control" id="team" placeholder="Team Name" name="team" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="teame" placeholder="Team Email (for confirmation)" name="teame" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="teame" placeholder="MD5 of Pass" name="pass" required>
+        </div>
+    
+        <div class="text-center"><button type="submit" class="btn btn-primary">Fix</button></div>
+      </form>
+    </div>
+    <div class="row" data-aos="fade-up" data-aos-delay="100" >
+    <h3><span>Delete Chall:</span></h3>
+    <div class="col-lg-6; float:left" >
+      <form class="input-forms" action="/adminpanel" method="post">
+        <div class="row">
+          <div class="col form-group">
+            <input type="text" class="form-control" id="team" placeholder="Chall Name" name="cnamed" required>
+          </div>
+        </div>
+
+    
+        <div class="text-center"><button type="submit" class="btn btn-primary">Delete</button></div>
+      </form>
+    </div>
+    <div class="row" data-aos="fade-up" data-aos-delay="100" >
+    <h3><span>Release Challenges:</span></h3>
+    <div class="col-lg-6; float:left" >
+      <form class="input-forms" action="/adminpanel" method="post">
+        <div class="form-group">
+          <input type="text" class="form-control" id="cdesc" placeholder="Confirm, type 'yes'" name="release" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Release</button>
+      </form>
+      <br>
+      <br>
+      <br>
+    </div>
+    <h3><span>Stop CTF:</span></h3>
+    <div class="col-lg-6; float:left" >
+      <form class="input-forms" action="/adminpanel" method="post">
+        <div class="form-group">
+          <input type="text" class="form-control" id="cdesc" placeholder="Confirm, type 'yes'" name="stop" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Stop</button>
+      </form>
+      <br>
+      <br>
+      <br>
+    </div>
+  <table>
+    <tr>
+      <th>Released Challs</th>
+      <th>Uploaded (inQueue to be released)</th>
+
+    </tr>
+    <tr><td>---------------------</td><td>---------------------</td></tr>
+    <tr><td>---------------------</td><td>---------------------</td></tr>
+    <tr>
+      <td>    
+        <div class="col-10 " style="min-height: 230px;">
+          <table class="table scoreboard" style="border: none;">
+            <thead style="text-align: center;">
+              <tr>
+                <th style="width: 4em;border-top: none;">#</th>
+                <th style="border-top: none;">Challenge Name (Released)</th>
+              </tr>
+            </thead>
+            <tbody style="text-align: center;">
+              
+              <%for (var result in res[1]){%>
+                <tr>
+                <th style="font-weight:normal;"><%=Number(result)+1%></th>
+                <th style="font-weight:normal;"><%=res[1][result]%></th>
+                </tr>
+              <%}%>
+            </tbody>
+           </table>
+          </div>
+        </div>
+      </td>
+      <td>    
+        <div class="col-10 " style="min-height: 230px;">
+          <table class="table scoreboard" style="border: none;">
+            <thead style="text-align: center;">
+              <tr>
+                <th style="width: 4em;border-top: none;">#</th>
+                <th style="border-top: none;">Challenge Name (Not Released)</th>
+              </tr>
+            </thead>
+            <tbody style="text-align: center;">
+              
+              <%for (var result in res[0]){%>
+                <tr>
+                <th style="font-weight:normal;"><%=Number(result)+1%></th>
+                <th style="font-weight:normal;"><%=res[0][result]%></th>
+                </tr>
+              <%}%>
+            </tbody>
+           </table>
+          </div>
+        </div>
+      </td>
+</table> 
+
+
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/purecounter/purecounter.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>
