@@ -5,8 +5,7 @@ var app = express();
 
 var md5 = require("md5");
 var fs = require('fs');
-const http = require('http');
-const https = require('https');
+var http = require('http').createServer(app);
 const sqlite3 = require('sqlite3').verbose();
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc';
@@ -16,18 +15,9 @@ const iv = "COUNT-TO-1234567";
 bodyParser = require('body-parser');
 
 var accounts = {};
-
+var ctfend=0;
 const fivedays = 1000 * 60 * 60 * 24 * 5;
 
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/chain.pem', 'utf8');
-
-const credentials = {
-  key: privateKey,
-  cert: certificate,
-  ca: ca
-};
 
 //session middleware
 app.use(sessions({
@@ -276,7 +266,7 @@ app.post('/leaderboard', (req, res) => {
 
 });
 
-app.all('/', (req, res) => {
+app.get('/', (req, res) => {
   console.log("aaa");
   session=req.session;
   if (session.userid){
@@ -478,6 +468,11 @@ async function dowork(info){
       });
     }
   }
+  if (info["stop"]!=undefined){
+    if (info["stop"]==="yes"){
+      ctfend=1;
+    }
+  }
 }
 
 
@@ -576,6 +571,9 @@ async function getchalllead(name){
       resolve();
     });
   });
+  if (ctfend===1){
+    val=[];
+  }
   await new Promise((resolve) => {
     db.all(stmt2, (err, row) => {
       val2=row;
@@ -619,6 +617,13 @@ async function confirm(chall, flag, user){
       }
       resolve();
     });
+  });
+
+  await new Promise((resolve) => {
+    if (ctfend===1){
+      val=3;
+    }
+    resolve();
   });
   return val;
 
@@ -673,19 +678,12 @@ app.post('/challenges', (req, res) => {
 
 });
 
+
 app.use((error, req, res, next) => {
  console.error(error.stack);
  res.status(500).send("Something Broke!");
 })
 
-const httpsServer = https.createServer(credentials, app);
-
-httpsServer.listen(443, () => {
-  console.log('HTTPS Server running on port 443');
+http.listen(3000,() => {
+  console.log('listening on *:3000');
 });
-
-
-http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
-}).listen(82);
