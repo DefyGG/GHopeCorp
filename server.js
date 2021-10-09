@@ -10,7 +10,7 @@ const https = require('https');
 const sqlite3 = require('sqlite3').verbose();
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc';
-const key = "DefyGGDoesNotCareAboutSecureIV12";
+const key = "WowOMGIcareSoMuchAboutIV12YaY";
 const iv = "COUNT-TO-1234567";
 
 bodyParser = require('body-parser');
@@ -19,9 +19,9 @@ var accounts = {};
 var ctfend=0;
 const fivedays = 1000 * 60 * 60 * 24 * 5;
 
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/ctf.pbjar.net/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/ctf.pbjar.net/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/ctf.pbjar.net/chain.pem', 'utf8');
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/chain.pem', 'utf8');
 
 const credentials = {
   key: privateKey,
@@ -31,7 +31,7 @@ const credentials = {
 
 //session middleware
 app.use(sessions({
-    secret: "thisissecretandDefyGGisverycoolajdhbaowihdowaijhd",
+    secret: "PatrykIsSuperCoolAndGoodAtCodingWow$1",
     saveUninitialized:true,
     cookie: { maxAge: fivedays },
     resave: false

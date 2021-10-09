@@ -19,9 +19,9 @@ var accounts = {};
 
 const fivedays = 1000 * 60 * 60 * 24 * 5;
 
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/ctf.pbjar.net/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/ctf.pbjar.net/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/ctf.pbjar.net/chain.pem', 'utf8');
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/2021.killerqueenctf.org/chain.pem', 'utf8');
 
 const credentials = {
   key: privateKey,
@@ -276,7 +276,7 @@ app.post('/leaderboard', (req, res) => {
 
 });
 
-app.get('/', (req, res) => {
+app.all('/', (req, res) => {
   console.log("aaa");
   session=req.session;
   if (session.userid){
@@ -688,4 +688,4 @@ httpsServer.listen(443, () => {
 http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
-}).listen(80);
+}).listen(82);
