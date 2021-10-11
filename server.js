@@ -45,7 +45,7 @@ var session;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.set('view engine', "ejs");
-let db = new sqlite3.Database('protected/IknowthisisreallyvulnerablebutIdontknowanyotherwaytoprotectourdbthatdoesnottakeanhourtomake.db', sqlite3.OPEN_READWRITE, (err) => {
+let db = new sqlite3.Database('protected/thisisasuperlongandsecuredatabasenametohelpactasanadditionalformofprotectionforityaynyello.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.error(err.message);
   }

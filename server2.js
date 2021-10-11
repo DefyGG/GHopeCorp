@@ -9,7 +9,7 @@ var http = require('http').createServer(app);
 const sqlite3 = require('sqlite3').verbose();
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc';
-const key = "DefyGGDoesNotCareAboutSecureIV12";
+const key = "WowOMGIcareSoMuchAboutIV12YaY";
 const iv = "COUNT-TO-1234567";
 
 bodyParser = require('body-parser');
@@ -21,7 +21,7 @@ const fivedays = 1000 * 60 * 60 * 24 * 5;
 
 //session middleware
 app.use(sessions({
-    secret: "thisissecretandDefyGGisverycoolajdhbaowihdowaijhd",
+    secret: "PatrykIsSuperCoolAndGoodAtCodingWow$1",
     saveUninitialized:true,
     cookie: { maxAge: fivedays },
     resave: false
@@ -35,7 +35,7 @@ var session;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.set('view engine', "ejs");
-let db = new sqlite3.Database('protected/IknowthisisreallyvulnerablebutIdontknowanyotherwaytoprotectourdbthatdoesnottakeanhourtomake.db', sqlite3.OPEN_READWRITE, (err) => {
+let db = new sqlite3.Database('protected/thisisasuperlongandsecuredatabasenametohelpactasanadditionalformofprotectionforityaynyello.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.error(err.message);
   }
@@ -310,6 +310,16 @@ app.post('/login', (req, res) => {
     }
   });
 });
+
+app.get('/registeruser', (req, res) => {
+  session=req.session;
+  if(session.userid){
+    res.sendFile(__dirname + '/public' + 'index2.html');
+  }
+  else{
+    res.sendFile(__dirname + '/public' +'/templates/registeruser.html');
+  }
+})
 
 app.get('/register', (req, res) => {
   session=req.session;
