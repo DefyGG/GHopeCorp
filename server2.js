@@ -5,11 +5,11 @@ var app = express();
 
 var md5 = require("md5");
 var fs = require('fs');
-var http = require('http').createServer(app);
+var http = require('http')
 const sqlite3 = require('sqlite3').verbose();
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc';
-const key = "WowOMGIcareSoMuchAboutIV12YaY";
+const key = "NcQfTjWnZr4u7x!A%D*G-KaPdSgUkXp2";
 const iv = "COUNT-TO-1234567";
 
 bodyParser = require('body-parser');
@@ -33,9 +33,10 @@ app.use(cookieParser());
 var session;
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('public'));
+app.use(express.static('templates'));
+
 app.set('view engine', "ejs");
-let db = new sqlite3.Database('protected/thisisasuperlongandsecuredatabasenametohelpactasanadditionalformofprotectionforityaynyello.db', sqlite3.OPEN_READWRITE, (err) => {
+let db = new sqlite3.Database('protected/data.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.error(err.message);
   }
@@ -62,10 +63,11 @@ async function check(user, email){
   var stmt = "select count(*) from users where un=(?);";
   var stmt2 = "select count(*) from users where email=(?);";
   let val=0;
+
   await new Promise((resolve) => {
     
     db.get(stmt, [user], (err, row) => {
-      console.log(row);
+      
       if (row["count(*)"]!==0){
         val=1;
       }
@@ -85,7 +87,7 @@ async function check(user, email){
 }
 
 async function check2(user, pwd){
-  var stmt = "select * from users where un=(?);";
+  var stmt = "select * from users where email=(?);";
   let val=0;
   await new Promise((resolve) => {
     db.get(stmt, [user], (err, row) => {
@@ -171,9 +173,9 @@ async function normlead(){
         resolve();
       });
     });
- 
+
     for (var j=0; j<val.length;j++){
-      console.log(val[j]["chall_name"]);
+
 
       await new Promise((resolve) => {
         db.get(stmt3, [val[j]["chall_name"]], (err, row) => {
@@ -222,112 +224,148 @@ function userIsAllowed(callback) {
   callback(false);
 };
 
-app.get('/leaderboard', (req, res) => {
-  session=req.session;
 
-  normlead().then(result => {
 
-      if (session.userid){
-        res.render('leaderboard',{res:result[0], len: result[0].length, high:result[1], type: "Main"});
-      }
-      else{
-        res.sendFile(__dirname + '/public' +'/index.html');
-      }
+async function inqueue(){
+
+  var stmt2 = "SELECT name, description, author, downloads FROM challs";
+
+  var inq; var arr=[]
+  await new Promise((resolve) => {
+    db.all(stmt2, (err, row) => {
+      inq=row;
+      resolve();
+    });
   });
-  
+  inq.sort(function(first, second) {  return  Number(first.author.split(":")[0]) - Number(second.author.split(":")[0]); });
 
-});
+  var date = new Date;
 
-app.post('/leaderboard', (req, res) => {
-  session=req.session;
- 
-  if (session.userid){
-    var type = Object.keys(req.body)[0];
-    console.log(type);
-    if (type==="Main"){
-      getreflead().then(result => {
- 
-        res.render('leaderboard',{res:result[0], len: result[0].length, high:result[1], type: "Referral"});
-      });
+  inq.forEach(first => {
+
+    if (Number(first.author.split(":")[0]) * 60 + Number(first.author.split(":")[1]) - date.getHours() * 60 - date.getMinutes() > 0){
+      first["status"] = "badge bg-success status";
+      first["message"] = "Upcoming";
     }
     else{
-      normlead().then(result => {
-
-        res.render('leaderboard',{res:result[0], len: result[0].length, high:result[1], type: "Main"});
-      });
+      if (Number(first.downloads.split(":")[0]) * 60 + Number(first.downloads.split(":")[1]) - date.getHours() * 60 - date.getMinutes() > 0){
+        first["status"] = "badge bg-warning status";
+        first["message"] = "Current";
+      }
+      else{
+        first["status"] = "badge bg-danger status";
+        first["message"] = "Completed";
+      }
     }
-    
-  }
-  else{
-    res.sendFile(__dirname + '/public' +'/index.html');
-  }
-  
-  
+    if (Number(first.author.split(":")[0]) > 12){
+      first.author = "" + ((Number(first.author.split(":")[0])-12)) + ":" + first.author.split(":")[1] + " PM"
+    }
+    else if (Number(first.author.split(":")[0]) == 12){
+      first.author = first.author + " PM";
+    }
+    else{
+      first.author = first.author + " AM";
+    }
 
-});
-
-app.get('/', (req, res) => {
-  console.log("aaa");
-  session=req.session;
-  if (session.userid){
-    res.sendFile(__dirname + '/public' +'/index2.html');
-  }
-  else{
-    res.sendFile(__dirname + '/public' +'/index.html');
-  }
-  
-});
-
-app.get('/protected/*', function(req, res, next) {
-  userIsAllowed(function(allowed) {
-    if (allowed) {
-      next(); // call the next handler, which in this case is express.static
-    } else {
-      res.end('You are not allowed!');
+    if (Number(first.downloads.split(":")[0]) > 12){
+      first.downloads = "" + ((Number(first.downloads.split(":")[0])-12)) + ":" + first.downloads.split(":")[1] + " PM"
+    }
+    else if (Number(first.downloads.split(":")[0]) == 12){
+      first.downloads = first.downloads + " PM";
+    }
+    else{
+      first.downloads = first.downloads + " AM";
     }
   });
-});
+
+  return inq;
+}
+
+async function dowork(info){
+  var stmt3 = "update challs set rank=3;";
+  var stmt2 ="update users set pass = ? where un = ? and email = ?";
+  var stmt55 ="update challs set name = ?, description = ?, author = ?, downloads=?, type = ?, flag = ?, base = ? where name = ?";
+  var stmt21 ="select count(*) from users where un = ? and email = ?";
+  var stmt4="delete from challs where name=?";
+  var stmt1="insert into challs values (?, ?, ?, 0, ?, ?, ?, 0, ?)";
+  var test = "select * from challs;";
+
+  if (info["cname"]!=undefined){
+    if (info["tStart"].split(":").length != 2 || info["tEnd"].split(":").length != 2){
+      return;
+    }
+    else{
+      if (!(!isNaN(parseInt(info["tStart"].split(":")[0])) && !isNaN(parseInt(info["tStart"].split(":")[1])) && !isNaN(parseInt(info["tEnd"].split(":")[0])) && !isNaN(parseInt(info["tEnd"].split(":")[0])))){
+        return;
+      }
+    }
+    await new Promise((resolve) => {
+      
+        db.get(stmt1, [info["cname"],info["cdesc"],info["tStart"],info["tEnd"],info["cat"],info["flag"],info["base"]], (err, row) => {
+      resolve();
+    });
+        
+      });
+    await new Promise((resolve) => {
+        var stmt5="create table `"+info["cname"]+"` (team VARCHAR(255), time integer)";
+        db.run(stmt5);
+        resolve();
+  
+      });
+    
+  }
+
+  if (info["delete"]!=undefined){
+    await new Promise((resolve) => {
+      
+        db.get(stmt4, [info["delete"]], (err, row) => {
+      resolve();
+
+    });
+        
+      });
+    await new Promise((resolve) => {
+      
+        var stmt6="drop table `"+info["delete"]+"`";
+        db.run(stmt6);
+        resolve();
+      });
+    
+  }
+}
 
 app.get('/login', (req, res) => {
   session=req.session;
   if (session.userid){
-    res.sendFile(__dirname + '/public' +'/index2.html');
+    res.redirect('/');
   }
   else{
-    res.sendFile(__dirname + '/public' +'/templates/login.html');
+    res.sendFile(__dirname + '/public' +'/login.html');
   }
 });
 
 app.post('/login', (req, res) => {
-  check2(req.body.uname,req.body.pwd).then(result => {
+  check2(req.body.email,req.body.password).then(result => {
     if (result===1){
       res.sendFile(__dirname + '/public' +'/error1.html');
     }
     else{
+
       session=req.session;
-      session.userid=req.body.uname;
-      res.sendFile(__dirname + '/public' +'/index2.html');
+      session.userid=req.body.email;
+  
+      res.redirect('/');
     }
   });
 });
 
-app.get('/registeruser', (req, res) => {
-  session=req.session;
-  if(session.userid){
-    res.sendFile(__dirname + '/public' + 'index2.html');
-  }
-  else{
-    res.sendFile(__dirname + '/public' +'/templates/registeruser.html');
-  }
-})
-
 app.get('/register', (req, res) => {
   session=req.session;
   if (session.userid){
-    res.sendFile(__dirname + '/public' +'/index2.html');
+    res.redirect('/');
   }
   else{
-    res.sendFile(__dirname + '/public' +'/templates/register.html');
+    res.sendFile(__dirname + '/public' +'/register.html');
   }
 });
 
@@ -343,147 +381,174 @@ app.post('/register', (req, res) => {
         var stmt3="CREATE table `" +  md5(req.body.username) + "` (chall_name varchar(255), chall_id Varchar(255), time integer);";
 
         session=req.session;
-        session.userid=req.body.username;
+        session.userid=req.body.email;
         db.run(stmt3);
         stmt.run(req.body.username,md5(req.body.password),req.body.email,req.body.hs==="Highschool",encrypt(req.body.username)["encryptedData"],req.body.ref);
-        if (req.body.ref.length!==0){
-          stmt2.run(req.body.ref);
-        }
+        // if (req.body.ref.length!==0){
+        //   stmt2.run(req.body.ref);
+        // }
         
-        res.sendFile(__dirname + '/public' +'/index2.html');
+        res.redirect('/');
       }
   });
 });
 
-app.get('/logout',(req,res) => {
-    req.session.destroy();
-    res.redirect('/');
+
+
+app.use(function(req, res, next) {
+
+    if(!req.session.userid) {       
+        res.redirect('/login');
+    } else {
+        next();
+    }
+});
+
+app.get('/', (req, res) => {
+
+  session=req.session;
+  if (session.userid){
+    inqueue(session.userid).then(result => {
+
+        res.render('index', {res: result});
+      });
+  }
+  else{
+    res.redirect('/login');
+  }
+  
 });
 
 
-async function inqueue(){
+app.use(express.static('public'));
 
-  var stmt2 = "SELECT name FROM challs WHERE rank = 3;";
-  var stmt3 = "SELECT name FROM challs WHERE rank = 0;";
-  var inq, onq; var arr=[[],[]]
-  await new Promise((resolve) => {
-    db.all(stmt3, (err, row) => {
-      inq=row;
-      resolve();
-    });
-  });
-  await new Promise((resolve) => {
-    db.all(stmt2, (err, row) => {
-      onq=row;
-      resolve();
-    });
-  });
+app.get('/signout',(req,res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
+app.get('/admin', (req, res) => {
+  session=req.session;
+  if (session.userid=="danielmathew2006@gmail.com" || session.userid == "givinghopecorps@gmail.com"){
+    inqueue(session.userid).then(result => {
 
-  await new Promise((resolve) => {
-    for (var i=0;i<inq.length;i++){
-      arr[0].push(inq[i]["name"]);
-    }
-    for (var i=0;i<onq.length;i++){
-      arr[1].push(onq[i]["name"]);
-    }
-    resolve();
-  });
-  return arr;
-}
-
-async function dowork(info){
-  var stmt3 = "update challs set rank=3;";
-  var stmt2 ="update users set pass = ? where un = ? and email = ?";
-  var stmt55 ="update challs set name = ?, description = ?, author = ?, downloads=?, type = ?, flag = ?, base = ? where name = ?";
-  var stmt21 ="select count(*) from users where un = ? and email = ?";
-  var stmt4="delete from challs where name=?";
-  var stmt1="insert into challs values (?, ?, ?, 0, ?, ?, ?, 0, ?)";
-  var test = "select * from challs;";
-
-  if (info["cname"]!=undefined){
-    await new Promise((resolve) => {
-      
-        db.get(stmt1, [info["cname"],info["cdesc"],info["author"],info["zip"],info["cat"],info["flag"],info["base"]], (err, row) => {
-      resolve();
-    });
-        
+        res.render('admin', {res: result});
       });
-    await new Promise((resolve) => {
-        var stmt5="create table `"+info["cname"]+"` (team VARCHAR(255), time integer)";
-        db.run(stmt5);
-        resolve();
+    
+  }
+  else{
+    res.redirect('/');
+  }
+});
+
+app.post('/admin',(req,res) => {
+    session=req.session;
+    if (session.userid=="danielmathew2006@gmail.com" || session.userid == "givinghopecorps@gmail.com"){
+
+      dowork(req.body).then(result => {
+        inqueue(session.userid).then(result => {
+        res.render('admin', {res: result});
+      });
+      });
+      
+    }
+    else{
+      res.redirect('/');
+    }
+});
+
+app.get('/speechtotext', (req, res) => {
+  session=req.session;
+  if (session.userid){
+    res.sendFile(__dirname + '/public' +'/speechtotext.html');
+  }
+  else{
+    res.sendFile(__dirname + '/public' +'/login.html');
+  }
+});
+
+app.get('/registeruser', (req, res) => {
+  session=req.session;
+  if(session.userid){
+    res.sendFile(__dirname + '/public' + '/index2.html');
+  }
+  else{
+    res.sendFile(__dirname + '/public' +'/templates/registeruser.html');
+  }
+});
+
+app.post('/registeruser', (req, res) => {
+  session=req.session;
+  if(session.userid){
+    res.sendFile(__dirname + '/public' + '/index2.html');
+  }
+  else{
+    var stmt = db.prepare("insert into users values (?, ?, ?, ?);");
+    session=req.session;
+    session.userid = req.body.username;
+    stmt.run(req.body.username, md5(req.body.password), req.body.email, req.body.hs==="Highschool");
+    res.sendFile(__dirname + '/public' + '/index3.html');
+  }
+});
+
+
+
+app.get('/leaderboard', (req, res) => {
+  session=req.session;
+
+  normlead().then(result => {
+
+      if (session.userid){
+        res.render('leaderboard',{res:result[0], len: result[0].length, high:result[1], type: "Main"});
+      }
+      else{
+        res.redirect('/');
+      }
+  });
   
+
+});
+
+app.post('/leaderboard', (req, res) => {
+  session=req.session;
+ 
+  if (session.userid){
+    var type = Object.keys(req.body)[0];
+
+    if (type==="Main"){
+      getreflead().then(result => {
+ 
+        res.render('leaderboard',{res:result[0], len: result[0].length, high:result[1], type: "Referral"});
       });
+    }
+    else{
+      normlead().then(result => {
+
+        res.render('leaderboard',{res:result[0], len: result[0].length, high:result[1], type: "Main"});
+      });
+    }
     
   }
-  if (info["cnameu"]!=undefined){
-    await new Promise((resolve) => {
-
-        var stmt55 ="update challs set name = ?, description = ?, author = ?, downloads=?, type = ?, flag = ?, base = ? where name = ?";
-
-        db.get(stmt55, [info["cnameuu"],info["cdesc"],info["author"],info["zip"],info["cat"],info["flag"],info["base"],info["cnameu"]], (err, row) => {
- 
-          resolve();
-        });
+  else{
+    res.redirect('/');
+  }
   
-        
-      });
-    
-  }
-  if (info["cnamed"]!=undefined){
-    await new Promise((resolve) => {
-      
-        db.get(stmt4, [info["cnamed"]], (err, row) => {
-      resolve();
+  
 
-    });
-        
-      });
-    await new Promise((resolve) => {
-      
-        var stmt6="drop table `"+info["cnamed"]+"`";
-        db.run(stmt6);
-        resolve();
-      });
-    
-  }
-  if (info["teame"]!=undefined){
-    var val;
-    await new Promise((resolve) => {
-      
-        db.get(stmt21, [info["team"],info["teame"]], (err, row) => {
-          val=row["count(*)"];
-          resolve();
-        });
-        
-      });
- 
-    await new Promise((resolve) => {
-      
-        if (val==1){
-          db.get(stmt2, [info["pass"],info["team"],info["teame"]], (err, row) => {
+});
 
-            resolve();
-          });
-        }
-        
-      });
 
-  }
-  if (info["release"]!=undefined){
-    if (info["release"]==="yes"){
-      await new Promise((resolve) => {
-        db.run(stmt3);
-        resolve();
-      });
+app.get('/protected/*', function(req, res, next) {
+  userIsAllowed(function(allowed) {
+    if (allowed) {
+      next(); // call the next handler, which in this case is express.static
+    } else {
+      res.end('You are not allowed!');
     }
-  }
-  if (info["stop"]!=undefined){
-    if (info["stop"]==="yes"){
-      ctfend=1;
-    }
-  }
-}
+  });
+});
+
+
+
 
 
 app.get('/adminpanel',(req,res) => {
@@ -548,7 +613,7 @@ app.get('/team', (req, res) => {
     });
   }
   else{
-    res.sendFile(__dirname + '/public' +'/index.html');
+    res.redirect('/');
   }
 
 });
@@ -565,7 +630,7 @@ app.post('/team', (req, res) => {
     });
   }
   else{
-    res.sendFile(__dirname + '/public' +'/index.html');
+    res.redirect('/');
   }
 
 });
@@ -664,7 +729,7 @@ app.get('/challenges', (req, res) => {
     });
   }
   else{
-    res.sendFile(__dirname + '/public' +'/index.html');
+    res.redirect('/');
   }
 
 });
@@ -676,14 +741,14 @@ app.post('/challenges', (req, res) => {
     confirm(cname,flag,session.userid).then(r => {
       add(cname,session.userid,r).then(result => {
         getchalllead(session.userid).then(result => {
-          console.log(r);
+        
           res.render('challenges',{challs:result[0], you: result[1], re: r});
         });
       });
     });
   }
   else{
-    res.sendFile(__dirname + '/public' +'/index.html');
+    res.redirect('/');
   }
 
 });
@@ -694,6 +759,12 @@ app.use((error, req, res, next) => {
  res.status(500).send("Something Broke!");
 })
 
-http.listen(3000,() => {
-  console.log('listening on *:3000');
+const host = 'localhost';
+const port = 8000;
+
+const requestListener = function (req, res) {};
+
+const server = http.createServer(app);
+server.listen(port, host, () => {
+    console.log(`Server is running on http://${host}:${port}`);
 });

@@ -390,7 +390,11 @@ async function inqueue(){
   });
   return arr;
 }
-
+function isNumeric(str) {
+  if (typeof str != "string") return false // we only process strings!  
+  return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+         !isNaN(parseFloat(str)) 
+}
 async function dowork(info){
   var stmt3 = "update challs set rank=3;";
   var stmt2 ="update users set pass = ? where un = ? and email = ?";
@@ -401,6 +405,17 @@ async function dowork(info){
   var test = "select * from challs;";
 
   if (info["cname"]!=undefined){
+    if (info["author"].split(":").length != 2 || info["zip"].split(":").length != 2){
+      return;
+    }
+    else{
+      if (!isNaN(parseInt(info["author"].split(":")[0])) && !isNaN(parseInt(info["author"].split(":")[1])) && !isNaN(parseInt(info["zip"].split(":")[0])) && !isNaN(parseInt(info["zip"].split(":")[0]))){
+        continue;
+      }
+      else{
+        return;
+      }
+    }
     await new Promise((resolve) => {
       
         db.get(stmt1, [info["cname"],info["cdesc"],info["author"],info["zip"],info["cat"],info["flag"],info["base"]], (err, row) => {
@@ -408,13 +423,6 @@ async function dowork(info){
     });
         
       });
-    await new Promise((resolve) => {
-        var stmt5="create table `"+info["cname"]+"` (team VARCHAR(255), time integer)";
-        db.run(stmt5);
-        resolve();
-  
-      });
-    
   }
   if (info["cnameu"]!=undefined){
     await new Promise((resolve) => {

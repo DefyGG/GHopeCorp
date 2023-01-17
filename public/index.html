@@ -5,188 +5,296 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Killer Queen CTF</title>
+  <title>Task Analysis - GHCorp</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <link href="assets/img/favicon.png" rel="icon">
+  <!-- Favicons -->
+  <!--<link href="assets/img/favicon.png" rel="icon">-->
+  <link href="assets/img/ghtransparent.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
+  <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.4.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
 
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
 
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/gh.png" alt="">
+        <span class="d-none d-lg-block">GHCorp</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
 
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+          </a>
+        </li><!-- End Search Icon-->
+        <li class="nav-item dropdown pe-3">
 
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <span class="d-none d-md-block dropdown-toggle ps-2">Hello!</span>
+          </a><!-- End Profile Image Icon -->
 
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/signout">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
 
-      <h1 class="logo"><a href="/">Killer Queen CTF<span>.</span></a></h1>
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
 
+      </ul>
+    </nav><!-- End Icons Navigation -->
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <a href="https://discord.gg/XV9S2nucbZ"><img src="assets/img/discord.png" style="width:50px; padding-right:25%"></a>
-          <li><a class="nav-link scrollto active" href="/">Home</a></li>
-          <li><a class="nav-link scrollto " href="/register">Register</a></li>
-          <li><a class="nav-link" href="/login">Login</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="/">
+          <i class="bi bi-grid"></i>
+          <span>Task Analysis</span>
+        </a>
+      <li class="nav-item">
+        <a class="nav-link " href="/admin">
+          <i class="bi bi-grid"></i>
+          <span>Task Admin</span>
+        </a>
+      </li><!-- End Admin Nav -->
+      <li class="nav-item">
+        <a class="nav-link " href="/speechtotext">
+          <i class="bi bi-grid"></i>
+          <span>Speech to Text</span>
+        </a>
+      </li><!-- End Speech to Text Nav -->
+<!--       <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-register.html">
+          <i class="bi bi-card-list"></i>
+          <span>Register</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-login.html">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Login</span>
+        </a>
+      </li> -->
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Task Analysis</h1>
+      <nav>
       </nav>
+    </div><!-- End Page Title -->
 
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+
+            <!-- Task Schedule -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Week</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Task Schedule<span>| Today</span></h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                          <th scope="col">Task</th>
+                          <th scope="col">Time</th>
+                          <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row"><a href="#">Task 1</a></th>
+                        <td class="times">Time1 - Time2</td>
+                        <td><span class="badge bg-success status">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">Task 2</a></th>
+                        <td class="times">Time1 - Time2</td>
+                        <td><span class="badge bg-warning status">Active</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">Task 3</a></th>
+                        <td class="times">Time1 - Time2</td>
+                        <td><span class="badge bg-danger status">Incoming</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">Task 4</a></th>
+                        <td class="times">Time1 - Time2</td>
+                        <td><span class="badge bg-danger status">Incoming</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">Task 5</a></th>
+                        <td class="times">Time1 - Time2</td>
+                        <td><span class="badge bg-danger status">Incoming</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Task Schedule -->
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <!-- Task Description -->
+          <div class="card">
+
+            <div class="card-body">
+              <h5 class="card-title">Task Description</span></h5>
+
+              <div class="activity">
+
+
+              </div>
+
+            </div>
+          </div><!-- End Recent Activity -->
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
-  </header>
-
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container" data-aos="zoom-out" data-aos-delay="100">
-      <h1 >Welcome to <span>Killer Queen CTF</span></h1>
-      <h2>Register soon, information below! Starting October 29th to October 31st!</h2>
+    <div class="credits">Modified by <strong><span>GHCorp</span></strong>.</div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> and <a href="mailto:givinghopecorps@gmail.com">GHCorp</a>
     </div>
-  </section>
-  <main id="main" >
-    <br>
-    <section class="featured-services section-bg">
-      <div class="section-title">
-          <h3>Meet our <span>Sponsors</span></h3>
-          <p>We couldn't thank them enough for making this CTF possible and helping us get prizes for the top teams as well as spreading awareness about cybersecurity.</p>
-      </div>
-      <div class="container" data-aos="fade-up">
+  </footer><!-- End Footer -->
 
-        <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"> <img src="wolframlogo-1.png" alt="Wolfram Logo" width="50%" > </div>
-              <h4 class="title"><a href="https://www.wolframalpha.com/">Wolfram Alpha</a></h4>
-              <p class="description">Thank you Wolfram for supplying Wolfram|One to ALL participants for 30 days. They will also give the special Wolfram Award (Wolfram|One for one year and a one-year subscription to Wolfram|Alpha Pro) for the top 3 teams in each division (plus one for the top referral).</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"> <img src="HTB-Logo-RGB_72.png" alt="HTB Logo" width="80%" > </div>
-              <h4 class="title"><a href="https://www.hackthebox.eu/">Hack the Box</a></h4>
-              <p class="description">Thank you so much Hack the Box for sponsoring this event. We have some amazing Hack the Box subscriptions (VIP passes) for the top teams. The exact specifications TBD but have fun!</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"> <img src="trail-of-bits-dark-alt.png" alt="TOF Logo" width="40%" > </div>
-              <h4 class="title"><a href="https://www.trailofbits.com/">Trail of Bits</a></h4>
-              <p class="description">A huge shoutout to Trail of Bits for sponsoring the prizes for this CTF. They have been so generous to many CTFs in the past, and you should definitely check them out for the latest info on cyber security.</p>
-            </div>
-          </div>
-
-      </div>
-    </section>
-    <br>
-    <section class="about section-bg">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
-          <h2>Welcome</h2>
-          <h3>CTF Information</span></h3>
-        </div>
-
-        <div class="col-lg-15 pt-4 pt-lg-2 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
-          <h3></h3>
-          <p class="fst-italic">
-            Some info about CTFs...
-          </p>
-          <ul>
-            <li>
-              <div>
-                <h5>What is a CTF?</h5>
-                <p>CTF stands for "Capture The Flag" which are a type of cybersecurity competition intended to teach about computer science and computer security. They involve participants exploiting common vulnerabilities found on web applications, pieces of software, cryptographic methods, networks, and other computer topics in order to gain a "flag" or proof that they successfully completed a particular challenge. Here are some great links to help you understand what a ctf is:</p>
-                <p>-->‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏<a href="https://ctftime.org/ctf-wtf/">https://ctftime.org/ctf-wtf/</a> </p>
-                <p>-->‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏<a href="https://dev.to/atan/what-is-ctf-and-how-to-get-started-3f04">https://dev.to/atan/what-is-ctf-and-how-to-get-started-3f04</a> </p> 
-                <p>-->‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏<a href="https://ctfd.io/whats-a-ctf/">https://ctfd.io/whats-a-ctf/</a> </p> 
-                <p>-->‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏<a href="https://ctf101.org/">https://ctf101.org/</a> </p> 
-
-              </div>
-            </li>
-            <li>
-              <div>
-                <h5>HALPPPPPP I've never done a CTF before?!?!?!?!?!</h5>
-                <p>Woah...Woah...Woah...don't worry. This CTF will test people from all difficulty ranges. We want to be as inclusive as possible with how hard our challenges are. This means there will be a plethora of problems that a geared to those who start CTFs for the first time, and there will be just as many for those who are regulars. We want our CTF to boost CTF morale in general. This means those who are long-time competitors and those who have made this CTF their first CTF, should really enjoy the competition. This does not mean...all problems will be easy :p</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-
-      </div>
-    </section>
-    <br>
-    <section class="about section-bg">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
-          <h2>Our CTF...</h2>
-          <h3>Killer Queen CTF</span></h3>
-        </div>
-
-        <div class="col-lg-15 pt-4 pt-lg-2 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
-          <h3></h3>
-          <p class="fst-italic">
-            Here are some common questions we would like to answer about our CTF and CTFs in general.
-          </p>
-          <ul>
-            <li>
-              <div>
-                <h5>Divisions:</h5>
-                <p>We will have two divisions <b>Highschool</b> and <b>Open/College</b> we do allow those in the Highschool division to switch to the Open/College division if they want. The criteria for the Highschool division is that you must be in the range of K-12. We do allow upcoming college freshmen to compete as Highschoolers since we consider that as still 12th grade.</p>
-
-                <p> Better put: </p>
-                <p>-->‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏High school division is for US-based high school seniors (and younger)</p>
-                <p>-->‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ Open/College is well...open to all!</p>
- 
-              <br>
-               
-              </div>
-            </li>
-            <li>
-              <div>
-                <h5>Connect with us:</h5>
-                <p>STOP WHAT YOUR ARE DOING RIGHT NOW....okay? Join our Discord: <a href="https://discord.gg/XV9S2nucbZ"> https://discord.gg/XV9S2nucbZ </a> and you can email us at: patrick.dobranowski@killerqueenctf.org (shhh thats not a doxx)</p>
-                <p>Want to know more? Visit us out our website: <a href="https://killerqueenctf.org" target="_blank"> https://killerqueenctf.org </a> </p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-
-      </div>
-    </section>
-
-    
-
-  <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-
-  <script src="assets/vendor/aos/aos.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/purecounter/purecounter.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
 
+  <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <script>
+    const durations = document.getElementsByClassName("times");
+    const statuses = document.getElementsByClassname("status");
+    var currentDate = new Date();
+    for(var i = 0; i < durations.length; i++) {
+      const times = durations[i].split(" - ");
+      var start = times[0];
+      const startHourMin = start.split(":");
+      var startHour = startHourMin[0];
+      var startMin = startHourMin[1];
+      var end = times[1];
+      const endHourMin = end.split(":");
+      var endHour = endHourMin[0];
+      var endMin = endHourMin[1];
+      var startDate = new Date();
+      startDate.setMinutes(startMin);
+      if(startHour >= 5) {
+        startDate.setHours(+startHour + 12);
+      } else {
+        startDate.setHours(startHour);
+      }
+      var endDate = new Date();
+      endDate.setMinutes(endMin);
+      if(endHour >= 5) {
+        endDate.setHours(+endHour + 12);
+      } else {
+        endDate.setHours(endHour);
+      }
+      if(currentDate >= startDate && currentDate <= endDate) {
+        statuses[i].className = "badge bg-warning status";
+        statuses[i].innerHTML = Active;
+      }
+      else if(currentDate > endDate) {
+        statuses[i].className = "badge bg-success status";
+        statuses[i].innerHTML = Complete;
+      }
+      else if(currentDate < startDate) {
+        statuses[i].className = "badge bg-danger status";
+        statuses[i].innerHTML = Incoming;
+      }
+    }
+  </script>
 </body>
 
 </html>
